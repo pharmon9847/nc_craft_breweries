@@ -74,8 +74,8 @@ function optionChanged(user_brew) {
 
     // nest data by beer style
     var beersByType = d3.nest()
-        .key(function (d) { return d.master_style; })
-        .rollup(function (v) { return v.length; })
+        .key(function(d) { return d.master_style; })
+        .rollup(function(v) { return v.length; })
         .entries(filtered);
 
     // get beer styles
@@ -173,7 +173,7 @@ function optionChanged(user_brew) {
     myChart.update();
 
     // make bar chart interactive
-    document.getElementById("myChart").onclick = function (evt) {
+    document.getElementById("myChart").onclick = function(evt) {
         var activePoints = myChart.getElementsAtEventForMode(evt, 'point', myChart.options);
         var firstPoint = activePoints[0];
         if (firstPoint == undefined) {
@@ -219,8 +219,8 @@ function init() {
 
     // nest data by beer style
     var beersByType = d3.nest()
-        .key(function (d) { return d.master_style; })
-        .rollup(function (v) { return v.length; })
+        .key(function(d) { return d.master_style; })
+        .rollup(function(v) { return v.length; })
         .entries(filtered);
 
     // get beer styles
@@ -339,7 +339,7 @@ function init() {
     });
 
     // make bar chart interactive
-    document.getElementById("myChart").onclick = function (evt) {
+    document.getElementById("myChart").onclick = function(evt) {
         var activePoints = myChart.getElementsAtEventForMode(evt, 'point', myChart.options);
         var firstPoint = activePoints[0];
         if (firstPoint == undefined) {
