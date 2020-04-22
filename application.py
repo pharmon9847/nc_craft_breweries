@@ -9,7 +9,7 @@ breweries = pd.read_csv("data/nc_breweries_df.csv")
 breweries_condensed = pd.read_csv("data/satallite_breweries_removed.csv")
 
 # establish mongo db connection
-conn = 'mongodb+srv://pharmon9847:<password>@cluster0-xhk0t.mongodb.net/test?retryWrites=true&w=majority'
+conn = 'mongodb://localhost:27017'
 client = pymongo.MongoClient(conn)
 db = client.nc_breweries_db
 
