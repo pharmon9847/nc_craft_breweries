@@ -1,7 +1,14 @@
-# import dependencies
-from flask import Flask, render_template, jsonify
-import pymongo
+# -*- coding: utf-8 -*-
+import datetime
+from hashlib import md5
+
+import pytz
+from flask import Flask, render_template, jsonify, request, \
+    abort, g, flash, session
+from werkzeug.security import check_password_hash, generate_password_hash
+from flask.ext.pymongo import pymongo
 import pandas as pd
+from bson.objectid import ObjectId
 
 # read in data
 master_condensed = pd.read_csv("data/master_beer_condensed.csv")
@@ -9,9 +16,9 @@ breweries = pd.read_csv("data/nc_breweries_df.csv")
 breweries_condensed = pd.read_csv("data/satallite_breweries_removed.csv")
 
 # establish mongo db connection
-conn = 'mongodb://localhost:27017'
-client = pymongo.MongoClient(conn)
-db = client.nc_breweries_db
+##conn = 'mongodb://localhost:27017'
+##client = pymongo.MongoClient(conn)
+##db = client.nc_breweries_db
 
 # drop existing collection to prevent duplicates
 db.master_condensed.drop()
@@ -24,6 +31,11 @@ db.breweries.insert_many(breweries.to_dict('records'))
 db.breweries_condensed.insert_many(breweries_condensed.to_dict('records'))
 
 app = Flask(__name__)
+
+# setup mongodb
+mongo = PyMongo(app)
+client = pymongo.MongoClient
+db = client.nc_breweries_db
 
 @app.route('/')
 def main():

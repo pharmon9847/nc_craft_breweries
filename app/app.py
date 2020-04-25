@@ -1,7 +1,6 @@
 import os
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify
 from flask_pymongo import PyMongo
-import pandas as pd
 
 application = Flask(__name__)
 

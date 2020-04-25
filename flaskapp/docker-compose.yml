@@ -1,7 +1,6 @@
 version: '3'
 services:
 
-
   flask:
     build:
       context: app
@@ -13,9 +12,9 @@ services:
       APP_ENV: "prod"
       APP_DEBUG: "False"
       APP_PORT: 5000
-      MONGODB_DATABASE: flaksdb
-      MONGODB_USERNAME: pharmon9847
-      MONGODB_PASSWORD: Getfuzzy1
+      MONGODB_DATABASE: flaskdb
+      MONGODB_USERNAME: test_user
+      MONGODB_PASSWORD: 7iKJFOkPjJTjH4u1
       MONGODB_HOSTNAME: mongodb
     volumes:
       - appdata:/var/www
@@ -25,23 +24,21 @@ services:
       - frontend
       - backend
 
-
   mongodb:
     image: mongo:4.0.8
     container_name: mongodb
     restart: unless-stopped
-    command: mongo --auth
+    command: mongod --auth
     environment:
-      MONGO_INITDB_ROOT_USERNAME: pharmon9847
-      MONGO_INITDB_ROOT_PASSWORD: Getfuzzy1
-      MONGO_INITDB_DATABASE: flaksdb
-      MONGODB_DATA-DIR: /data/db
-      MONGO_LOG_DIR: /dev/null
+      MONGO_USERNAME: test_user
+      MONGO_PASSWORD: 7iKJFOkPjJTjH4u1
+      MONGO_INITDB_DATABASE: flaskdb
+      MONGODB_DATA_DIR: /data/db
+      MONDODB_LOG_DIR: /dev/null
     volumes:
       - mongodbdata:/data/db
     networks:
       - backend
-
 
   webserver:
     build:
@@ -53,7 +50,7 @@ services:
     environment:
       APP_ENV: "prod"
       APP_NAME: "webserver"
-      APP_DEBUG: "true"
+      APP_DEBUG: "false"
       SERVICE_NAME: "webserver"
     ports:
       - "80:80"
@@ -65,14 +62,12 @@ services:
     networks:
       - frontend
 
-
 networks:
   frontend:
     driver: bridge
   backend:
     driver: bridge
 
-    
 volumes:
   mongodbdata:
     driver: local
