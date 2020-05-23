@@ -1,7 +1,7 @@
 import os
 import pymongo
-import pandas as pd
 import math
+import pandas as pd
 from flask import Flask, redirect, url_for, request, render_template, jsonify
 from pymongo import MongoClient
 
@@ -14,20 +14,22 @@ breweries_condensed = pd.read_csv("data/satallite_breweries_removed.csv")
 # establish mongo db connection
 #conn = 'mongodb://localhost:27017'
 
-client = pymongo.MongoClient("mongodb+srv://pharmon9847:ljcx7R9iOsO8oH0b@cluster0-xhk0t.mongodb.net/test?retryWrites=true&w=majority")
-db = client.nc_breweries_db
+client = pymongo.MongoClient("mongodb+srv://pharmon9847:ljcx7R9iOsO8oH0b@cluster1.xhk0t.mongodb.net/test?retryWrites=true&w=majority")
+db = client.nc_craft_breweries
 
 # drop existing collection to prevent duplicates
 db.beer_master.drop()
 db.master_condensed.drop()
 db.breweries.drop()
 db.breweries_condensed.drop()
+#db.nc_breweries_db.drop()
 
 # creates a collection and inserts data
 db.beer_master.insert_many(master.to_dict('records'))
 db.master_condensed.insert_many(master_condensed.to_dict('records'))
 db.breweries.insert_many(breweries.to_dict('records'))
 db.breweries_condensed.insert_many(breweries_condensed.to_dict('records'))
+#db.nc_breweries_db.insert_many(nc_breweries_db.to_dict('records'))
 
 
 app = Flask(__name__)

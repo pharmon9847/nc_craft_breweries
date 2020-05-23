@@ -64,7 +64,7 @@ app = Flask(__name__)
 # setup mongodb
 #mongo = PyMongo(app)
 #client = pymongo.MongoClient
-#db = client.nc_breweries_db
+db = client.nc_breweries_db
 
 @app.route('/')
 def main():
