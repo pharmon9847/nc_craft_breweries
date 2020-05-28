@@ -1,5 +1,5 @@
-version: 1.0
-name: First pipeline example
+version: v1.0
+name: Apple/Mojave Based Pipeline
 agent:
   machine:
     type: a1-standard-4
